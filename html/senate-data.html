@@ -1,48 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link rel="stylesheet" href="../css/house-data.css">
-      
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>Senators | TGIF</title>
    </head>
    <body>
-      <div class="head">
-         <h1 >TGIF</h1>
+      <div class="header">
+         <div class="header-left">
+            <a href="home-starter-page.html"><img src="../images/logo-icon1.png" width="80" alt=""></a> <span>Transparent Government in Fact</span>
+         </div>
+         <div class="header-right">
+            <img src="../images/email.png" width="30" alt=""> <a href="mailto:info@tgif.net">info@tgif.net</a>
+         </div>
       </div>
       <nav class="navbar navbar-expand-lg navbar-light bg-new-blue">
-         <a class="navbar-brand" href="#">TGIF</a>
+         <span class="navbar-brand">TGIF</span>
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span>
          </button>       
          <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
                <li class="nav-item active"><a href="home-starter-page.html" class="nav-link">Home</a></li>
                <li class="nav-item dropdown">
-                  <a href="#" class="nav-link dropdown-toggle" role="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Congress 113</a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a href="#" class="nav-link dropdown-toggle" role="button" id="navbarDropdownCon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Congress 113</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownCon">
                      <a class="dropdown-item" href="house-data.html">House</a>
                      <a class="dropdown-item" href="#">Senate</a>
                   </div>
                </li>
+               <li class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" role="button" id="navbarDropdownAttend" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Attendance</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownAttend">
+                     <a class="dropdown-item" href="house-attendance.html">House</a>
+                     <a class="dropdown-item" href="senate-attendance.html">Senate</a>
+                  </div>
+               </li>
+               <li class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" role="button" id="navbarDropdownPart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Party Loyalty</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownPart">
+                     <a class="dropdown-item" href="house-party-loyalty.html">House</a>
+                     <a class="dropdown-item" href="senate-party-loyalty.html">Senate</a>
+                  </div>
+               </li>
+               <li class="email-mobile">
+                  <a href="mailto:info@tgif.net">Email us</a>
+               </li>
             </ul>
          </div>
       </nav>
-        
-        <div style="padding-left:20px" class="text-down">
-            <h2>Senators</h2>
-            <p class="text">First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
-        </div>
-            <div class="party-choice">
-               <label> Filter by Party :</label>
-               <input type="checkbox" name="par"  id="parR" onclick="partyr()">Republican
-               <input type="checkbox" name="par" value="D" id="parD" onclick="partyd()"> Democrat
-               <input type="checkbox" name="par" value="I" id="parI" onclick="partyi()">Independent
+      <div class="text-down" >
+         <h4>Senators</h4>
+         <div class="para">
+            <div class="para-left">
+               <p class="text">First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
             </div>
-            <div class="state-choice">
-               <label>Filter by State</label>
-               
-               <select  name="state"  >
+            <!--
+               <div class="para-right">
+                     <img src="../images/congress.jpg" alt="TGIF" class="para-right-img">
+               </div>
+               -->
+         </div>
+         <div class="para" style="padding-top:20px;">
+            <div class="party-choice para-left">
+               <label> Filter by Party: </label>
+               <input type="checkbox" name="party" value="R" id="par1" onclick="wanted1()">Republican
+               <input type="checkbox" name="party" value="D" id="par2" onclick="wanted2()"> Democrat
+               <input type="checkbox" name="party" value="I" id="par3" onclick="wanted3()">Independent
+            </div>
+            <div class="state-choice para-right">
+               <label style="padding-bottom: 10px;">Filter by State: </label>
+               <select  name="state">
                   <option value="all">ALL</option>
                   <option value="TN">TN</option>
                   <option value="NH">NH</option>
@@ -50,29 +78,32 @@
                   <option value="WY">WY</option>
                   <option value="MT">MT</option>
                </select>
-         
             </div>
-           <!--Table container-->     
-      <div class="table-responsive-md">
-   <table id="page-data" class="table table-bordered table-hover cong-table">
-   <thead style="background-color: #adbce6">
-      <th scope="col">Name</th>
-      <th scope="col">Party</th>
-      <th scope="col">State</th>
-      <th scope="col">Years in Office</th>
-      <th scope="col">Votes with Party</th>
-     
-   </thead>
-   </table>
-</div>
-            
-      <footer class="footer-copyright text-center py-3" class="footer-down">
-         <small>&copy; Copyright 2020 TGIF, All Rights Reserved</small>
-     </footer>   
-     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+         </div>
+      </div>
+      <div class="data-table-container">
+         <!--Table container-->   
+         <div class="table-responsive-md">
+            <table id="page-data" class="table table-bordered table-hover cong-table">
+               <thead>
+                  <th scope="col">Name</th>
+                  <th scope="col">Party</th>
+                  <th scope="col">State</th>
+                  <th scope="col">Years in Office</th>
+                  <th scope="col">Votes with Party</th>
+               </thead>
+            </table>
+         </div>
+      </div>
+      <div class="bg-new-blue">
+         <footer class="footer-copyright text-center py-3 footer-down">
+            <small>&copy; Copyright 2020 TGIF, All Rights Reserved</small>
+         </footer>
+      </div>
+      <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>   
-     <script type="text/javascript" src="../js/pro-Congress-113-senate.js"></script>
-     <script type="text/javascript" src="../js/congpages.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="../js/pro-Congress-113-senate.js"></script>
+      <script type="text/javascript" src="../js/congpages.js"></script>
    </body>
 </html>

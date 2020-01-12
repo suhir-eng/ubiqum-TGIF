@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <link rel="stylesheet" href="../css/house-data.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <title>Congressmen | TGIF</title>
    </head>
    <body>
@@ -26,11 +23,28 @@
             <ul class="navbar-nav mr-auto">
                <li class="nav-item active"><a href="home-starter-page.html" class="nav-link">Home</a></li>
                <li class="nav-item dropdown">
-                  <a href="#" class="nav-link dropdown-toggle" role="button" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Congress 113</a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a href="#" class="nav-link dropdown-toggle" role="button" id="navbarDropdownCon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Congress 113</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownCon">
                      <a class="dropdown-item" href="#">House</a>
                      <a class="dropdown-item" href="senate-data.html">Senate</a>
                   </div>
+               </li>
+               <li class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" role="button" id="navbarDropdownAttend" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Attendance</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownAttend">
+                     <a class="dropdown-item" href="house-attendance.html">House</a>
+                     <a class="dropdown-item" href="senate-attendance.html">Senate</a>
+                  </div>
+               </li>
+               <li class="nav-item dropdown">
+                  <a href="#" class="nav-link dropdown-toggle" role="button" id="navbarDropdownPart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Party Loyalty</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownPart">
+                     <a class="dropdown-item" href="house-party-loyalty.html">House</a>
+                     <a class="dropdown-item" href="senate-party-loyalty.html">Senate</a>
+                  </div>
+               </li>
+               <li class="email-mobile">
+                  <a href="mailto:info@tgif.net">Email us</a>
                </li>
             </ul>
          </div>
@@ -44,7 +58,7 @@
             </div>
             <!--
                <div class="para-right">
-                  <img src="../images/logo-icon.png" width="300" alt="">
+                     <img src="../images/congress.jpg" alt="TGIF" class="para-right-img">
                </div>
                -->
          </div>
@@ -81,13 +95,16 @@
                </thead>
             </table>
          </div>
-         <script type="text/javascript" src="../js/pro-congress-113-house.js"></script>
-         <script type="text/javascript" src="../js/congpages.js"></script>
       </div>
       <div class="bg-new-blue">
          <footer class="footer-copyright text-center py-3 footer-down">
             <small>&copy; Copyright 2020 TGIF, All Rights Reserved</small>
          </footer>
       </div>
+      <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="../js/pro-congress-113-house.js"></script>
+      <script type="text/javascript" src="../js/congpages.js"></script>
    </body>
 </html>

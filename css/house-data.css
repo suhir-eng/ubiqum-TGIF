@@ -1,9 +1,13 @@
-
+.nav-item a{
+    color: rgba(0,0,0,.9) !important;
+}
 .footer-down {
     position: relative;
-    bottom: 0;    
+    bottom: 0;
 }
-
+.email-mobile{
+    display: none;
+}
 .cong-table {
     position: relative;
     text-align: center;
@@ -79,12 +83,30 @@
     float: left;
     width: 65%;
 }
+.home-img{
+    width: 400px;
+}
+
 
 @media only screen and (max-width: 600px) {
+    .email-mobile{
+        display: block;
+        height: 40px;
+        padding: 8px 0px;
+    }
+    .email-mobile a{
+        color: rgba(0,0,0,.9);
+        text-decoration: underline;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+    }
+
     .data-table-container{
         padding: 0px;
         width: 100%;
     }
+
     .header{
         padding: 0px;
     }
@@ -94,10 +116,20 @@
     .header-left span{
         font-size: 15px;
     }
+
     .para-right{
         float: none;
     }
     .para-left{
         width: 100%;
+    }
+    .home-img{
+        width: 270px;
+        padding-top: 10px;
+        text-align: center;
+    }
+    
+    #collapsePara{
+        padding-top: 20px;
     }
 }
