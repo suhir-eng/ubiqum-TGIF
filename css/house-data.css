@@ -1,3 +1,6 @@
+body{
+    background-color: floralwhite;
+}
 .nav-item a{
     color: rgba(0,0,0,.9) !important;
 }
@@ -11,12 +14,17 @@
 .cong-table {
     position: relative;
     text-align: center;
+    border:1px black solid !important;
+}
+.cong-table td{
+    border:1px black solid !important;
 }
 .cong-table thead{
     background-color: #adbce6
 }
 .cong-table thead th{
     vertical-align: middle;
+    border:1px black solid !important;
 }
 
 .bg-new-blue {
@@ -31,6 +39,7 @@
     margin-top: 5%;
     padding-left:15px;
     padding-right: 15px;
+    
 }
 .text-down h4, h5{
     padding-bottom: 5px;
@@ -90,8 +99,11 @@
     width: 48% !important;
 }
 
-.home-img{
+.home-img, .flag-img{
     width: 400px;
+}
+.flag-img{
+    margin-top:-50px;
 }
 
 #glance th,td{
@@ -135,10 +147,13 @@
     .para-left{
         width: 100%;
     }
-    .home-img{
+    .home-img,.flag-img{
         width: 270px;
         padding-top: 10px;
         text-align: center;
+    }
+    .flag-img{
+        margin-top: 0px;
     }
     
     #collapsePara{
