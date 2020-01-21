@@ -38,342 +38,139 @@ function buildoptions() {
 }
 
 
+buildoptions();
+
+//finding the fullname
+function findfullname(oneMember){
+	if (oneMember.middle_name != null){
+		 fullname=oneMember.first_name +" "+oneMember.middle_name+" "+oneMember.last_name;
+		 
+	}else{ fullname=oneMember.first_name +" "+oneMember.last_name}
+	return fullname;
+}
+
+//linking to the fullname
+function urlformember(oneMember){
+	let link =document.createElement("a");
+	  link.setAttribute("href",oneMember.url );
+	  link.style.color = "#4a84c3";
+	let linkText = document.createTextNode(findfullname(oneMember));
+	link.appendChild(linkText);
+	return link;
+}
+
 let tbBody = document.createElement("tbody");
 
-
-buildoptions();
 
 
 //function to fill data in house and senate data pages
 
 function datafill(arr) {
-
-	let tbBody = document.createElement("tbody");
-
-
-	// creating all cells
-	for (let i = 0; i < arr.length; i++) {
-
-		// creates a table row
-		let row = document.createElement("tr");
-		row.style.backgroundColor = ""
-		let mem = arr[i];
-		for (let j = 0; j < 5; j++) {
-			// Create a <td> element and a text node, make the text
-			// node the contents of the <td>, and put the <td> at
-			// the end of the table row
-			let cell = document.createElement("td");
-
-			if (j == 0) {
-				let fullname = mem["first_name"];
-
-				if (mem["middle_name"] != null) {
-
-					fullname = fullname + " " + mem["middle_name"];
-
-
-				} else {
-					fullname = mem["first_name"];
-				};
-
-				fullname = fullname + " " + mem["last_name"];
-				if (mem["url"] == "") {
-					let cellText = document.createTextNode(fullname);
-					cell.appendChild(cellText);
-				} else {
-					// adding a link to fullname
-					let link = document.createElement("a");
-
-					link.setAttribute("href", mem["url"]);
-					link.style.color = "#4a84c3";
-
-					let linkText = document.createTextNode(fullname);
-					link.appendChild(linkText);
-
-					// Add the link to the previously created TableCell.
-					cell.appendChild(link);
-				}
-
-
-				row.appendChild(cell);
-			}
-
-			if (j == 1) {
-
-				let cellText = document.createTextNode(mem["party"]);
-				cell.appendChild(cellText);
-				row.appendChild(cell);
-			}
-			if (j == 2) {
-				let cellText = document.createTextNode(mem["state"]);
-				cell.appendChild(cellText);
-				row.appendChild(cell);
-			}
-			if (j == 3) {
-				let cellText = document.createTextNode(mem["seniority"]);
-				cell.appendChild(cellText);
-				row.appendChild(cell);
-			}
-			if (j == 4) {
-				let cellText = document.createTextNode(mem["votes_with_party_pct"]);
-				cell.appendChild(cellText);
-				row.appendChild(cell);
-			}
-
-
-		}
-		// add the row to the end of the table body
-		tbBody.appendChild(row);
-
-
-	}
-
-	return tbBody;
-}
-//datafill()
-document.getElementById("page-data").appendChild(datafill(arr));
-//to solve the problem of undefind message
-document.getElementById("page-data").childNodes[0].nodeValue = null;
-
-
-//to drop the table
-function droptable() {
-
-	let element = document.getElementById("page-data");
-	while (element.firstChild) {
-		element.removeChild(element.firstChild);
-	}
-}
-
-// variable to check if the state filter is used
-let statefiltered = "";
-
-
-//filter by checkboxes 
-
-
-let checkboxR = document.querySelector("input[id=parR]");
-let checkboxD = document.querySelector("input[id=parD]");
-let checkboxI = document.querySelector("input[id=parI]");
-
-let filterarray = [0, 0, 0];
-
-checkboxR.addEventListener('change', function () {
-	if (this.checked) {
-		// Checkbox is checked..
-		filterarray[0] = 1;
-
-	} else {
-		// Checkbox is not checked..
-		filterarray[0] = 0;
-
-	}
-	if ((statefiltered == "") || (statefiltered == "ALL")) {
-		partyfilter(filterarray);
-	} else {
-		doublefilter(filterarray, statefiltered)
-	}
-});
-checkboxD.addEventListener('change', function () {
-	if (this.checked) {
-		// Checkbox is checked..
-		filterarray[1] = 1;
-
-	} else {
-		// Checkbox is not checked..
-		filterarray[1] = 0;
-
-
-	}
-	if ((statefiltered == "") || (statefiltered == "ALL")) {
-
-		partyfilter(filterarray);
-	} else {
-		doublefilter(filterarray, statefiltered);
-	}
-});
-checkboxI.addEventListener('change', function () {
-	if (this.checked) {
-		// Checkbox is checked..
-		filterarray[2] = 1;
-
-	} else {
-		// Checkbox is not checked..
-		filterarray[2] = 0;
-	}
-	if ((statefiltered == "") || (statefiltered == "ALL")) {
-		partyfilter(filterarray);
-	} else {
-		doublefilter(filterarray, statefiltered);
-	}
-});
-// for loop for array
-function forloop(arr, str1, str2) {
-	let newarr = [];
-	arr.forEach(element => {
-		if ((element["party"] == str1) || (element["party"] == str2)) {
-			newarr.push(element)
-		}
-
-
+	let tBody = document.getElementById("table-rows");
+	tBody.innerHTML = "";
+	arr.forEach(function(oneMember) {
+	  let tr = document.createElement("tr");
+	  let td1 = document.createElement("td");
+	 let td2 = document.createElement("td");
+	 let td3 = document.createElement("td");
+	 let td4 = document.createElement("td");
+	 let td5 = document.createElement("td");
+	 if (oneMember.url==""){
+	  td1.innerHTML = findfullname(oneMember);}
+	  else{
+       td1.appendChild(urlformember(oneMember))}
+	 td2.innerHTML = oneMember.party;
+	 td3.innerHTML = oneMember.state;
+	 td4.innerHTML = oneMember.seniority;
+	 td5.innerHTML = oneMember.votes_with_party_pct;
+	  tr.appendChild(td1);
+	  tr.appendChild(td2);
+	  tr.appendChild(td3);
+	  tr.appendChild(td4);
+	  tr.appendChild(td5);
+	  tBody.appendChild(tr);
+	  
 	});
-	return newarr
+	
+
 }
-// for loop for array with state condition
-function forloopWithState(arr, str1, str2, str3) {
-	let newarr = [];
-	arr.forEach(element => {
-		if (((element["party"] == str1) || (element["party"] == str2)) && (element["state"] == str3)) {
-			newarr.push(element)
-		}
+datafill(arr);
 
-
+// events on checkboxes and droplist
+function defineEvent() {
+	let checkBoxI = document.getElementById("parI");
+	let checkBoxD = document.getElementById("parD");
+	let checkBoxR = document.getElementById("parR");
+	let dropliststate= document.getElementById("state-selection")
+	checkBoxD.addEventListener("click", function() {
+	 doublefilter();
 	});
-	return newarr
-}
+	checkBoxI.addEventListener("click", function() {
+	 doublefilter();
+	});
+	checkBoxR.addEventListener("click", function() {
+	 doublefilter();
+	});
+	  dropliststate.addEventListener("change", function() {
+		doublefilter();
+	});
+  }
 
-// filter by party only function
-function partyfilter(filterarray) {
+  defineEvent();
 
-
-	if ((filterarray[0] == filterarray[1]) && (filterarray[1] == filterarray[2])) {
-		droptable();
-
-
-		document.getElementById("page-data").appendChild(datafill(arr));
-	}
-	if ((filterarray[0] == 1) && (filterarray[1] == 0) && (filterarray[2] == 0)) {
-
-		droptable();
-		newarr = [];
-
-		newarr = forloop(arr, "R", "");
-
-
-		document.getElementById("page-data").appendChild(datafill(newarr));
-	}
-	if ((filterarray[0] == 1) && (filterarray[1] == 1) && (filterarray[2] == 0)) {
-
-		droptable();
-		newarr = [];
-		newarr = forloop(arr, "R", "D");
-
-		document.getElementById("page-data").appendChild(datafill(newarr));
-	}
-	if ((filterarray[0] == 1) && (filterarray[1] == 0) && (filterarray[2] == 1)) {
-
-		droptable();
-		newarr = [];
-		newarr = forloop(arr, "R", "I");
-		document.getElementById("page-data").appendChild(datafill(newarr));
-	}
-	if ((filterarray[0] == 0) && (filterarray[1] == 1) && (filterarray[2] == 0)) {
-
-		droptable();
-		newarr = [];
-		newarr = forloop(arr, "D", "");
-		document.getElementById("page-data").appendChild(datafill(newarr));
-	}
-
-	if ((filterarray[0] == 0) && (filterarray[1] == 1) && (filterarray[2] == 1)) {
-
-		droptable();
-		newarr = [];
-		newarr = forloop(arr, "D", "I");
-		document.getElementById("page-data").appendChild(datafill(newarr));
-	}
-	if ((filterarray[0] == 0) && (filterarray[1] == 0) && (filterarray[2] == 1)) {
-
-		droptable();
-		newarr = [];
-		newarr = forloop(arr, "I", "");
-		document.getElementById("page-data").appendChild(datafill(newarr));
-	}
-}
-
-
-//filter by state only
-
-
-let dropdownstate = document.getElementById("state-selection");
-let x = document.getElementById("state-selection").value;
-dropdownstate.addEventListener('change', function () {
+  //filter for checkboxes only
+  function filtercheckbox() {
+	let checkBox = Array.from(
+	  document.querySelectorAll("input[name=party]:checked")
+	);
+	let checkBoxValue = checkBox.map(oneCheckbox => {
+	  return oneCheckbox.value;
+	});
+	let filteredMembers = [];
+	if (checkBoxValue.length ==0){
+				datafill(arr)
+	}else{
+	        arr.forEach(oneMember => {
+	              if (checkBoxValue.includes(oneMember.party)) {
+	                	filteredMembers.push(oneMember);
+	                }	 
+			});			
+			datafill(filteredMembers);
+		}
+  }
+  // filter for droplist only
+  function filterstate(){
+	  let x = document.getElementById("state-selection").value;
+	  let filteredliststate =[];
+	  arr.forEach(oneMember => {
+		  if (x =="ALL"){filteredliststate.push(oneMember);}
+		if (oneMember.state ==x) {
+		  filteredliststate.push(oneMember);
+        }
+		});
+		datafill(filteredliststate);
+  }
+// compined filters
+  function doublefilter(){
 	let x = document.getElementById("state-selection").value;
+	let checkBox = Array.from(
+		document.querySelectorAll("input[name=party]:checked")
+	  );
+	  let checkBoxValue = checkBox.map(oneCheckbox => {
+		return oneCheckbox.value;
+	  });
+	 
+	  let filteredMembers = [];
+	  if ((x=="ALL")&&(checkBoxValue.length==0)){datafill(arr)}
+	  else if(x=="ALL"){filtercheckbox()}
+	 else if(checkBoxValue.length==0){filterstate()}
+	 else{ arr.forEach(oneMember => {
+		if (checkBoxValue.includes(oneMember.party) &&(oneMember.state==x)) {
+			  filteredMembers.push(oneMember);
+		  }	 
+        });			
+       datafill(filteredMembers);}
+  }
 
 
-	if ((filterarray[0] == filterarray[1]) && (filterarray[1] == filterarray[2])) {
-		statefilter(x);
-	} else {
-		statefiltered = x;
-		doublefilter(filterarray, statefiltered)
-	}
-});
-// filter by state only function
-function statefilter(x) {
-
-	droptable();
-	if (x == "ALL") {
-		statefiltered = x;
-		document.getElementById("page-data").appendChild(datafill(arr));
-	} else {
-		let statearr = [];
-		let j = 0;
-		statefiltered = x;
-		for (i = 0; i < arr.length; i++) {
-			if (arr[i]["state"] == x) {
-				statearr[j] = arr[i];
-				j++;
-			}
-		}
-		document.getElementById("page-data").appendChild(datafill(statearr));
-	}
-}
-// both filters togather
-function doublefilter(filterarray, x) {
-	droptable();
-
-	let finalarr = [];
-	let j = 0;
-	if (x == "ALL") {
-		partyfilter(filterarray);
-	} else {
-		if ((filterarray[0] == filterarray[1]) && (filterarray[1] == filterarray[2])) {
-			statefilter(x);
-		}
-		if ((filterarray[0] == 1) && (filterarray[1] == 0) && (filterarray[2] == 0)) {
-
-
-			finalarr = forloopWithState(arr, "R", "", x);
-			document.getElementById("page-data").appendChild(datafill(finalarr));
-
-		}
-		if ((filterarray[0] == 1) && (filterarray[1] == 1) && (filterarray[2] == 0)) {
-			finalarr = forloopWithState(arr, "R", "D", x);
-			document.getElementById("page-data").appendChild(datafill(finalarr));
-
-		}
-		if ((filterarray[0] == 1) && (filterarray[1] == 0) && (filterarray[2] == 1)) {
-
-			finalarr = forloopWithState(arr, "R", "I", x);
-			document.getElementById("page-data").appendChild(datafill(finalarr));
-
-		}
-		if ((filterarray[0] == 0) && (filterarray[1] == 1) && (filterarray[2] == 0)) {
-
-			finalarr = forloopWithState(arr, "", "D", x);
-			document.getElementById("page-data").appendChild(datafill(finalarr));
-
-		}
-
-		if ((filterarray[0] == 0) && (filterarray[1] == 1) && (filterarray[2] == 1)) {
-			finalarr = forloopWithState(arr, "D", "I", x);
-			document.getElementById("page-data").appendChild(datafill(finalarr));
-		}
-		if ((filterarray[0] == 0) && (filterarray[1] == 0) && (filterarray[2] == 1)) {
-			finalarr = forloopWithState(arr, "I", "", x);
-
-			document.getElementById("page-data").appendChild(datafill(finalarr));
-		}
-
-	}
-}
+ 
