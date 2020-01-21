@@ -145,7 +145,7 @@ function droptable() {
 	}
 }
 
-
+// variable to check if the state filter is used
 let statefiltered = "";
 
 
@@ -162,7 +162,7 @@ checkboxR.addEventListener('change', function () {
 	if (this.checked) {
 		// Checkbox is checked..
 		filterarray[0] = 1;
-		
+
 	} else {
 		// Checkbox is not checked..
 		filterarray[0] = 0;
@@ -178,16 +178,15 @@ checkboxD.addEventListener('change', function () {
 	if (this.checked) {
 		// Checkbox is checked..
 		filterarray[1] = 1;
-		
+
 	} else {
 		// Checkbox is not checked..
 		filterarray[1] = 0;
-		
 
-		
+
 	}
 	if ((statefiltered == "") || (statefiltered == "ALL")) {
-		
+
 		partyfilter(filterarray);
 	} else {
 		doublefilter(filterarray, statefiltered);
@@ -197,7 +196,7 @@ checkboxI.addEventListener('change', function () {
 	if (this.checked) {
 		// Checkbox is checked..
 		filterarray[2] = 1;
-		
+
 	} else {
 		// Checkbox is not checked..
 		filterarray[2] = 0;
@@ -208,6 +207,30 @@ checkboxI.addEventListener('change', function () {
 		doublefilter(filterarray, statefiltered);
 	}
 });
+// for loop for array
+function forloop(arr, str1, str2) {
+	let newarr = [];
+	arr.forEach(element => {
+		if ((element["party"] == str1) || (element["party"] == str2)) {
+			newarr.push(element)
+		}
+
+
+	});
+	return newarr
+}
+// for loop for array with state condition
+function forloopWithState(arr, str1, str2, str3) {
+	let newarr = [];
+	arr.forEach(element => {
+		if (((element["party"] == str1) || (element["party"] == str2)) && (element["state"] == str3)) {
+			newarr.push(element)
+		}
+
+
+	});
+	return newarr
+}
 
 // filter by party only function
 function partyfilter(filterarray) {
@@ -223,65 +246,32 @@ function partyfilter(filterarray) {
 
 		droptable();
 		newarr = [];
-		j = 0;
-		for (i = 0; i < arr.length; i++) {
-			if (arr[i]["party"] == ["R"]) {
-				newarr[j] = arr[i];
-				j++;
-			}
-		}
+
+		newarr = forloop(arr, "R", "");
+
+
 		document.getElementById("page-data").appendChild(datafill(newarr));
 	}
 	if ((filterarray[0] == 1) && (filterarray[1] == 1) && (filterarray[2] == 0)) {
 
 		droptable();
 		newarr = [];
-		j = 0;
-		for (i = 0; i < arr.length; i++) {
-			if (arr[i]["party"] == ["R"]) {
-				newarr[j] = arr[i];
-				j++;
-			}
-		}
-		for (i = 0; i < arr.length; i++) {
-			if (arr[i]["party"] == ["D"]) {
-				newarr[j] = arr[i];
-				j++;
-			}
-		}
+		newarr = forloop(arr, "R", "D");
+
 		document.getElementById("page-data").appendChild(datafill(newarr));
 	}
 	if ((filterarray[0] == 1) && (filterarray[1] == 0) && (filterarray[2] == 1)) {
-        
+
 		droptable();
 		newarr = [];
-		j = 0;
-		for (i = 0; i < arr.length; i++) {
-			if (arr[i]["party"] == ["R"]) {
-				newarr[j] = arr[i];
-				j++;
-			}
-		}
-		for (i = 0; i < arr.length; i++) {
-			if (arr[i]["party"] == ["I"]) {
-				newarr[j] = arr[i];
-				j++;
-			}
-		}
+		newarr = forloop(arr, "R", "I");
 		document.getElementById("page-data").appendChild(datafill(newarr));
 	}
 	if ((filterarray[0] == 0) && (filterarray[1] == 1) && (filterarray[2] == 0)) {
 
 		droptable();
 		newarr = [];
-		j = 0;
-		for (i = 0; i < arr.length; i++) {
-			if (arr[i]["party"] == ["D"]) {
-				newarr[j] = arr[i];
-				j++;
-			}
-		}
-
+		newarr = forloop(arr, "D", "");
 		document.getElementById("page-data").appendChild(datafill(newarr));
 	}
 
@@ -289,33 +279,14 @@ function partyfilter(filterarray) {
 
 		droptable();
 		newarr = [];
-		j = 0;
-		for (i = 0; i < arr.length; i++) {
-			if (arr[i]["party"] == ["D"]) {
-				newarr[j] = arr[i];
-				j++;
-			}
-		}
-		for (i = 0; i < arr.length; i++) {
-			if (arr[i]["party"] == ["I"]) {
-				newarr[j] = arr[i];
-				j++;
-			}
-		}
+		newarr = forloop(arr, "D", "I");
 		document.getElementById("page-data").appendChild(datafill(newarr));
 	}
 	if ((filterarray[0] == 0) && (filterarray[1] == 0) && (filterarray[2] == 1)) {
 
 		droptable();
 		newarr = [];
-		j = 0;
-		for (i = 0; i < arr.length; i++) {
-			if (arr[i]["party"] == ["I"]) {
-				newarr[j] = arr[i];
-				j++;
-			}
-		}
-
+		newarr = forloop(arr, "I", "");
 		document.getElementById("page-data").appendChild(datafill(newarr));
 	}
 }
@@ -328,7 +299,7 @@ let dropdownstate = document.getElementById("state-selection");
 let x = document.getElementById("state-selection").value;
 dropdownstate.addEventListener('change', function () {
 	let x = document.getElementById("state-selection").value;
-	
+
 
 	if ((filterarray[0] == filterarray[1]) && (filterarray[1] == filterarray[2])) {
 		statefilter(x);
@@ -339,12 +310,10 @@ dropdownstate.addEventListener('change', function () {
 });
 // filter by state only function
 function statefilter(x) {
- 
+
 	droptable();
-
-
 	if (x == "ALL") {
-		 statefiltered =x;
+		statefiltered = x;
 		document.getElementById("page-data").appendChild(datafill(arr));
 	} else {
 		let statearr = [];
@@ -373,85 +342,35 @@ function doublefilter(filterarray, x) {
 		}
 		if ((filterarray[0] == 1) && (filterarray[1] == 0) && (filterarray[2] == 0)) {
 
-			for (i = 0; i < arr.length; i++) {
-				if ((arr[i]["party"] == "R") && (arr[i]["state"] == x)) {
-					finalarr[j] = arr[i];
-					j++;
-				}
-			}
+
+			finalarr = forloopWithState(arr, "R", "", x);
 			document.getElementById("page-data").appendChild(datafill(finalarr));
 
 		}
 		if ((filterarray[0] == 1) && (filterarray[1] == 1) && (filterarray[2] == 0)) {
-			for (i = 0; i < arr.length; i++) {
-				if ((arr[i]["party"] == "R") && (arr[i]["state"] == x)) {
-					finalarr[j] = arr[i];
-					j++;
-				}
-			}
-			for (i = 0; i < arr.length; i++) {
-				if ((arr[i]["party"] == "D") && (arr[i]["state"] == x)) {
-					finalarr[j] = arr[i];
-					j++;
-				}
-			}
+			finalarr = forloopWithState(arr, "R", "D", x);
 			document.getElementById("page-data").appendChild(datafill(finalarr));
 
 		}
 		if ((filterarray[0] == 1) && (filterarray[1] == 0) && (filterarray[2] == 1)) {
 
-			for (i = 0; i < arr.length; i++) {
-				if ((arr[i]["party"] == "R") && (arr[i]["state"] == x)) {
-					finalarr[j] = arr[i];
-					j++;
-				}
-			}
-			for (i = 0; i < arr.length; i++) {
-				if ((arr[i]["party"] == "I") && (arr[i]["state"] == x)) {
-					finalarr[j] = arr[i];
-					j++;
-				}
-			}
+			finalarr = forloopWithState(arr, "R", "I", x);
 			document.getElementById("page-data").appendChild(datafill(finalarr));
 
 		}
 		if ((filterarray[0] == 0) && (filterarray[1] == 1) && (filterarray[2] == 0)) {
 
-			for (i = 0; i < arr.length; i++) {
-				if ((arr[i]["party"] == "D") && (arr[i]["state"] == x)) {
-					finalarr[j] = arr[i];
-					j++;
-				}
-			}
-
+			finalarr = forloopWithState(arr, "", "D", x);
 			document.getElementById("page-data").appendChild(datafill(finalarr));
 
 		}
 
 		if ((filterarray[0] == 0) && (filterarray[1] == 1) && (filterarray[2] == 1)) {
-			for (i = 0; i < arr.length; i++) {
-				if ((arr[i]["party"] == "D") && (arr[i]["state"] == x)) {
-					finalarr[j] = arr[i];
-					j++;
-				}
-			}
-			for (i = 0; i < arr.length; i++) {
-				if ((arr[i]["party"] == "I") && (arr[i]["state"] == x)) {
-					finalarr[j] = arr[i];
-					j++;
-				}
-			}
+			finalarr = forloopWithState(arr, "D", "I", x);
 			document.getElementById("page-data").appendChild(datafill(finalarr));
 		}
 		if ((filterarray[0] == 0) && (filterarray[1] == 0) && (filterarray[2] == 1)) {
-
-
-			for (i = 0; i < arr.length; i++) {
-				if ((arr[i]["party"] == "I") && (arr[i]["state"] == x)) {
-					finalarr[j] = arr[i];
-					j++;
-				}
-			}
+			finalarr = forloopWithState(arr, "I", "", x);
 
 			document.getElementById("page-data").appendChild(datafill(finalarr));
 		}
