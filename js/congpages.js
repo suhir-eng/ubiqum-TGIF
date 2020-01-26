@@ -102,7 +102,7 @@ function urlformember(oneMember){
 //function to fill data in house and senate data pages
 
 function datafill(members) {
-	
+	document.getElementById("loader1").style.display="none";
 	let tBody = document.getElementById("page-data")
 	tBody.innerHTML = "";
 	Array.from(members).forEach(function(oneMember){

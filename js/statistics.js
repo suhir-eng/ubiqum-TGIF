@@ -79,6 +79,7 @@ function partymember(arr) {
 
 
 		if (document.getElementById("glance") != null) {
+			document.getElementById("loader1").style.display="none";
 			document.getElementById("glance").appendChild(dataobject(statistics));
 		}
 
@@ -90,6 +91,7 @@ function partymember(arr) {
 
 
 		if (document.getElementById("bottom-attendance") != null) {
+			document.getElementById("loader2").style.display="none";
 			document.getElementById("bottom-attendance").appendChild(dataleast(least(sortedobj)));
 		}
 		//building the bottom table
@@ -122,6 +124,7 @@ function partymember(arr) {
 			return parseFloat(a.missed_votes_pct) - parseFloat(b.missed_votes_pct);
 		});
 		if (document.getElementById("most-attendance") != null) {
+			document.getElementById("loader3").style.display="none";
 			document.getElementById("most-attendance").appendChild(dataleast(least(sortedobjrev)));
 		}
 	}
@@ -232,6 +235,7 @@ function loyalpages(arr) {
 			"Total": [arr.length, averagecal(arr, "votes_with_party_pct")]
 		};
 		if (document.getElementById("glance-loy") != null) {
+			document.getElementById("loader1").style.display="none";
 			document.getElementById("glance-loy").appendChild(dataobject(statisticsloy));
 		}
 
@@ -262,7 +266,7 @@ function loyalpages(arr) {
 		});
 
 		if (document.getElementById("bottom-senate-loyalty") != null) {
-
+			document.getElementById("loader2").style.display="none";
 			document.getElementById("bottom-senate-loyalty").appendChild(dataleastloyal(least(sortedobjloy)));
 		}
 
@@ -271,6 +275,7 @@ function loyalpages(arr) {
 			return parseFloat(b.votes_with_party_pct) - parseFloat(a.votes_with_party_pct);
 		});
 		if (document.getElementById("most-senate-loyalty") != null) {
+			document.getElementById("loader3").style.display="none";
 			document.getElementById("most-senate-loyalty").appendChild(dataleastloyal(least(sortedobjloyrev)));
 		}
 
