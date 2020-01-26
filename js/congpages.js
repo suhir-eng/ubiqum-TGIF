@@ -1,10 +1,46 @@
-let arr = data.results[0]["members"];
+
+ let arr =[];
+ let txt ="";
+function renderRemoteData(url,txt){
+	let loading = true;
+  fetch(url,
+   {method:"GET",
+    dataType: 'json',
+    headers :{"X-API-Key":"LZOb4ub75l4DHlg1E7gnEhU1AlRFTyLch2cy7KJp"}})
+  
+    .then(response => {
+      console.log(response);
+      let json = response.json();
+      return json;
+    })
+    .then(result => {
+      loading = false;
+      arr=result.results[0]["members"];
+    
+      if (txt=="page-data"){
+       
+           buildoptions(arr);
+            datafill(arr);
+           defineEvent();}
+    else if(txt=="senate-attendance"){
+      
+      partymember();
+       dataobject(arr);
+       dataleast(arr);
+     }
+      
+    })
+    .catch(error => console.log(error));
+	//fetchdata(url,txt);
+}
+	
+
 let allstate = [];
 let selectList = document.getElementById("state-selection");
 
 //a function to build options for dropdown list
 
-function buildoptions() {
+function buildoptions(arr) {
 	//define allstate list
 	for (let i = 0; i < arr.length; i++) {
 		allstate[i] = arr[i]["state"];
@@ -38,7 +74,7 @@ function buildoptions() {
 }
 
 
-buildoptions();
+
 
 //finding the fullname
 function findfullname(oneMember){
@@ -59,26 +95,30 @@ function urlformember(oneMember){
 	return link;
 }
 
-let tbBody = document.createElement("tbody");
+
 
 
 
 //function to fill data in house and senate data pages
 
-function datafill(arr) {
-	let tBody = document.getElementById("table-rows");
+function datafill(members) {
+	
+	let tBody = document.getElementById("page-data")
 	tBody.innerHTML = "";
-	arr.forEach(function(oneMember) {
+	Array.from(members).forEach(function(oneMember){
+		
 	  let tr = document.createElement("tr");
 	  let td1 = document.createElement("td");
 	 let td2 = document.createElement("td");
 	 let td3 = document.createElement("td");
 	 let td4 = document.createElement("td");
 	 let td5 = document.createElement("td");
+	 
 	 if (oneMember.url==""){
 	  td1.innerHTML = findfullname(oneMember);}
 	  else{
-       td1.appendChild(urlformember(oneMember))}
+	   td1.appendChild(urlformember(oneMember))}
+	   
 	 td2.innerHTML = oneMember.party;
 	 td3.innerHTML = oneMember.state;
 	 td4.innerHTML = oneMember.seniority;
@@ -91,13 +131,15 @@ function datafill(arr) {
 	  tBody.appendChild(tr);
 	  
 	});
-	
+
+
+	return tBody;
 
 }
-datafill(arr);
 
 // events on checkboxes and droplist
 function defineEvent() {
+	
 	let checkBoxI = document.getElementById("parI");
 	let checkBoxD = document.getElementById("parD");
 	let checkBoxR = document.getElementById("parR");
@@ -116,39 +158,33 @@ function defineEvent() {
 	});
   }
 
-  defineEvent();
+
 
   //filter for checkboxes only
-  function filtercheckbox() {
-	let checkBox = Array.from(
-	  document.querySelectorAll("input[name=party]:checked")
-	);
-	let checkBoxValue = checkBox.map(oneCheckbox => {
-	  return oneCheckbox.value;
-	});
+  function filtercheckbox(checkBoxValue) {
+	
 	let filteredMembers = [];
-	if (checkBoxValue.length ==0){
-				datafill(arr)
-	}else{
+	if (arr.length!=0){
+	
 	        arr.forEach(oneMember => {
 	              if (checkBoxValue.includes(oneMember.party)) {
 	                	filteredMembers.push(oneMember);
 	                }	 
 			});			
-			datafill(filteredMembers);
+			datafill(filteredMembers);}
 		}
-  }
+
   // filter for droplist only
-  function filterstate(){
-	  let x = document.getElementById("state-selection").value;
+  function filterstate(x){
+
 	  let filteredliststate =[];
+	  if(arr.length!=0){
 	  arr.forEach(oneMember => {
-		  if (x =="ALL"){filteredliststate.push(oneMember);}
 		if (oneMember.state ==x) {
 		  filteredliststate.push(oneMember);
         }
 		});
-		datafill(filteredliststate);
+		datafill(filteredliststate);}
   }
 // compined filters
   function doublefilter(){
@@ -162,8 +198,8 @@ function defineEvent() {
 	 
 	  let filteredMembers = [];
 	  if ((x=="ALL")&&(checkBoxValue.length==0)){datafill(arr)}
-	  else if(x=="ALL"){filtercheckbox()}
-	 else if(checkBoxValue.length==0){filterstate()}
+	  else if(x=="ALL"){filtercheckbox(checkBoxValue)}
+	 else if(checkBoxValue.length==0){filterstate(x)}
 	 else{ arr.forEach(oneMember => {
 		if (checkBoxValue.includes(oneMember.party) &&(oneMember.state==x)) {
 			  filteredMembers.push(oneMember);

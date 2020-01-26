@@ -77,7 +77,7 @@
       <div class="data-table-container">
          <!--Table container-->   
          <div class="table-responsive-md">
-            <table id="page-data" class="table table-bordered table-hover cong-table">
+            <table  class="table table-bordered table-hover cong-table">
                <thead>
                   <th scope="col">Name</th>
                   <th scope="col">Party</th>
@@ -85,7 +85,7 @@
                   <th scope="col">Years in Office</th>
                   <th scope="col">Votes with Party</th>
                </thead>
-               <tbody id="table-rows"></tbody>
+               <tbody id="page-data"></tbody>
             </table>
          </div>
       </div>
@@ -97,7 +97,9 @@
       <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
-      <script type="text/javascript" src="../js/pro-congress-113-house.js"></script>
+     <!-- <script type="text/javascript" src="../js/pro-congress-113-house.js"></script>-->
+    <!-- <script type="text/javascript" src="../js/datafetch.js"></script>-->
       <script type="text/javascript" src="../js/congpages.js"></script>
+      <script type="text/javascript">renderRemoteData("https://api.propublica.org/congress/v1/116/house/members.json","page-data")</script>
    </body>
 </html>
