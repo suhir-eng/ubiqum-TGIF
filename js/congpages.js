@@ -85,7 +85,7 @@ function findfullname(oneMember){
 	return fullname;
 }
 
-//linking to the fullname
+//linking url to the fullname
 function urlformember(oneMember){
 	let link =document.createElement("a");
 	  link.setAttribute("href",oneMember.url );
